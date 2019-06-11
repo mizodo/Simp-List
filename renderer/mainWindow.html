@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Simp-List</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+
+<body>
+
+    <div class="drag_bar">
+        <div class="title">Simp-List</div>
+        <nav>
+            <button class="button_toggle_menu">Menu</button>
+            <div class="menu_items">
+                <button class="button_load_db">Load DB file</button>
+                <button class="button_new_db">New DB file</button>
+                <button class="button_settings">Settings</button>
+            </div>
+        </nav>
+        <div class="app_controls">
+            <button class="minimize_app"></button>
+            <button class="maximize_app"></button>
+            <button class="exit_app"></button>
+        </div>
+    </div>
+    <div class="shadow_drag"></div>
+
+    <main>
+        <!--    OPTIONS PANE : hidden = false once window loads, prevents elements from jumping around on load -->
+        <div class="settings_pane" hidden>
+            <div class="settings_top">
+                <button class="button_close_settings"> </button>
+                <h1>Options and Settings</h1>
+            </div>
+
+            <div class="settings_wrap">
+                <h2>Current Database</h2>
+                <p class="database_path"></p>
+                <p class="database_filename"></p>
+                <button class="button_remove_old_completed_task">Remove Old Completed Task</button>
+                <h2>Appearance</h2>
+                <div class="label_input_wrap">
+                    <label for="list_side_by_side">Task List Side By Side (if space permits)</label>
+                    <input type="checkbox" name="list_side_by_side">
+                    <label for="dates_due_change_color">Due Dates Change Color</label>
+                    <input type="checkbox" name="dates_due_change_color">
+                </div>
+                <h2>New Task</h2>
+                <div class="label_input_wrap">
+                    <label for="new_task_auto_change_date">Automatically Change Date Based on Priority</label>
+                    <input type="checkbox" name="new_task_auto_change_date">
+                </div>
+
+            </div>
+            <div class="settings_wrap">
+                <h1>Priority Legend</h1>
+                <p>Note: Priority levels and descriptions. These settings are ONLY used when setting priority during
+                    adding a new item.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Priority</th>
+                            <th>Name</th>
+                            <th>Resolution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="priority P1">P1</div>
+                            </td>
+                            <td>Critical</td>
+                            <td>4 Hours</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="priority P2">P2</div>
+                            </td>
+                            <td>Important</td>
+                            <td>24 Hours</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="priority P3">P3</div>
+                            </td>
+                            <td>Normal</td>
+                            <td>3 Days</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="priority P4">P4</div>
+                            </td>
+                            <td>Low</td>
+                            <td>5 Days</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <header class="main_header">
+
+            <div class="menu_current_db_path"></div>
+            <div class="area_for_date_picker"></div>
+            <div class="add_new_item_container ">
+                <form class="form_add_new_task" action="#">
+                    <textarea class="input_new_list_item" id="input_new_list_item" type="text" name="new_list_item"
+                        placeholder="+ Add New Task"></textarea>
+
+                    <div class="new_item_options">
+
+                        <div class="priority_wrap">
+                            <input id="radio_p1" type="radio" name="priority_radio_group" value="P1" checked>
+                            <label for="radio_p1" class="priority P1">P1</label>
+
+
+                            <input id="radio_p2" type="radio" name="priority_radio_group" value="P2">
+                            <label for="radio_p2" class="priority P2">P2</label>
+
+
+                            <input id="radio_p3" type="radio" name="priority_radio_group" value="P3">
+                            <label for="radio_p3" class="priority P3">P3</label>
+
+
+                            <input id="radio_p4" type="radio" name="priority_radio_group" value="P4">
+                            <label for="radio_p4" class="priority P4">P4</label>
+                        </div>
+                        <div class="date_and_button_wrap">
+                            <label for="new_item_due_date">Due: </label>
+                            <input class="new_item_due_date" id="new_item_due_date" type="text" value="1/1/19" readonly>
+                            <button type="submit"></button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </header>
+
+        <section class="section_all_task">
+
+            <div class="list_container list_container_active">
+                <div class="list_header_wrap">
+                    <h2 class="list_header list_header_active">(<span class="list_quantity"></span>) Active</h2>
+                    <button class="button_sort_by_priority">
+                        <div class="sortArrowSVGDiv">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                style="enable-background:new 0 0 100 100;" xml:space="preserve">
+                                <g>
+                                    <polygon class="sortPriorityArrow"
+                                        points="12.5,37.2 12.5,62.8 50,63 87.5,62.8 87.5,37.2 50,37 	" />
+                                </g>
+                            </svg>
+                        </div>
+                    </button>
+                    <button class="button_sort_by_date">
+                        <div class="sortArrowSVGDiv">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                style="enable-background:new 0 0 100 100;" xml:space="preserve">
+                                <g>
+                                    <polygon class="sortDateArrow"
+                                        points="12.5,37.2 12.5,62.8 50,63 87.5,62.8 87.5,37.2 50,37 	" />
+                                </g>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+                <ul class="active_task_list all_task_list">
+                    <!-- move this outside of UL -->
+                    <div class="no_task_message" hidden>
+                        You have no task items. Get Working!
+                    </div>
+                </ul>
+            </div>
+            <div class="list_container list_container_completed">
+                <div class="list_header_wrap">
+                    <h2 class="list_header list_header_completed">(<span class="list_quantity"></span>) Completed
+                    </h2>
+                    <button class="button_sort_by_priority">
+                        <div class="sortArrowSVGDiv">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                style="enable-background:new 0 0 100 100;" xml:space="preserve">
+                                <g>
+                                    <polygon class="sortPriorityArrow"
+                                        points="12.5,37.2 12.5,62.8 50,63 87.5,62.8 87.5,37.2 50,37 	" />
+                                </g>
+                            </svg>
+                        </div>
+                    </button>
+                    <button class="button_sort_by_date">
+                        <div class="sortArrowSVGDiv">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                style="enable-background:new 0 0 100 100;" xml:space="preserve">
+                                <g>
+                                    <polygon class="sortDateArrow"
+                                        points="12.5,37.2 12.5,62.8 50,63 87.5,62.8 87.5,37.2 50,37 	" />
+                                </g>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+                <!-- <div class="list_container"> -->
+                <ul class="completed_item_list all_task_list">
+
+                </ul>
+                <ul>
+
+                </ul>
+                <!--  </div> -->
+            </div>
+        </section>
+
+        <section class="section_below_list">
+            <!-- FOR FUTURE TESTING -->
+        </section>
+
+        <div class="hidden_element" hidden>
+            <textarea class="input_edit_list_item"></textarea>
+            <div class="date_picker">
+                <header>
+                    <button class="prev_month"></button>
+                    <h1>
+                        <span class="month"></span>
+                        <span class="year"></span>
+                    </h1>
+                    <button class="next_month"></button>
+                </header>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>T</th>
+                            <th>F</th>
+                            <th>S</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script>
+        require('./mainWindow.js')
+        require('../js/datePicker.js')
+    </script>
+</body>
+
+</html>

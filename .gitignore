@@ -1,3 +1,6 @@
+# Additional
+default_task.db
+/release-builds
 # Logs
 logs
 *.log

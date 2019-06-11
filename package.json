@@ -1,0 +1,21 @@
+{
+  "name": "Simp-List",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . Simp-List --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"SimpList\"",
+    "package-linux": "electron-packager . Simp-List --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
+  },
+  "author": "Mike O'Donnell",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^5.0.1",
+    "electron-packager": "^13.1.1",
+    "electron-reload": "^1.4.0"
+  },
+  "dependencies": {
+    "nedb": "^1.8.0"
+  }
+}
