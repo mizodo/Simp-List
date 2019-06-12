@@ -1,7 +1,7 @@
 # Simp-List
 Task tracking 'to-do' list style electron application with priority levels and due dates.
 
-![Simp-List Logo](\assets\icons\win\icon.png)
+![Simp-List Logo](https://raw.githubusercontent.com/mizodo/Simp-List/master/assets/icons/win/icon.png)
 
 ## Summary
 
@@ -14,7 +14,7 @@ Simp-List is a a simple 'to-do list' style application for tracking **active** a
 4. **Main Status**, either Complete or Active. 
 
 ## Screenshot
-![Simp-List Logo](\img\simp_list_screenshot1.jpg)
+![Simp-List Logo](https://raw.githubusercontent.com/mizodo/Simp-List/master/img/simp_list_screenshot1.JPG)
 ___
 # Application Breakdown
 ## How to Package
