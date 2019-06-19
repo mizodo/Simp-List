@@ -17,8 +17,11 @@ Simp-List is a a simple 'to-do list' style application for tracking **active** a
 ![Simp-List Logo](https://raw.githubusercontent.com/mizodo/Simp-List/master/img/simp_list_screenshot1.JPG)
 ___
 # Application Breakdown
-## How to Package
-- In 'main.js' line 3, change `developmentEnviroment` to `false`.
+## How to Package and Run App
+(Note: tested for Windows only at the moment)
+- Clone this repository to your computer.
+- Run `npm install`.
+- In 'main.js', line 3, change `developmentEnviroment` to `false`.
 - In the terminal, type the command, `npm run package-win` . 
 - The app will be written to and available in the 'release-builds' folder. Open it and double click the executable to launch. 
 ## Application on Initial Load
